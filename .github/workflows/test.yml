@@ -9,6 +9,8 @@ name: Test
 jobs:
   test:
     runs-on: ubuntu-latest
+    permissions:
+      packages: read
     steps:
       - run: |
           curl -L \
