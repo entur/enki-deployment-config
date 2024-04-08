@@ -13,8 +13,14 @@ jobs:
       packages: read
       contents: write
     steps:
-      - uses: actions/checkout@v4
-      - run: |
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Configure git user
+        run: |
+          git config --global user.name 'Latest version bot'
+          git config --global user.email 'latest-version-bot@entur.org'
+      - name: Check latest version
+        run: |
           LATEST_VERSION=$(curl -L \
             -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" \
             -H "Accept: application/vnd.npm.install-v1+json" \
