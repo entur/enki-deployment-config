@@ -13,9 +13,9 @@ jobs:
       packages: read
     steps:
       - run: |
-          LATEST_VERSION = curl -L \
+          LATEST_VERSION=$(curl -L \
             -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" \
             -H "Accept: application/vnd.npm.install-v1+json" \
             https://npm.pkg.github.com/@entur/enki \
-            | jq -r '.["dist-tags"].latest'
+            | jq -r '.["dist-tags"].latest')
           echo $LATEST_VERSION
