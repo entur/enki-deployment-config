@@ -19,3 +19,11 @@ jobs:
             https://npm.pkg.github.com/@entur/enki \
             | jq -r '.["dist-tags"].latest')
           echo $LATEST_VERSION
+          CURRENT_VERSION=$(head -n 1 CURRENT_VERSION)
+          if [[ "$LATEST_VERSION" != "$CURRENT_VERSION" ]]; then
+            # Update CURRENT_VERSION
+            echo $LATEST_VERSION > CURRENT_VERSION
+            git add CURRENT_VERSION
+            git commit -m 'Updated CURRENT_VERSION'
+            git push origin main
+          fi
