@@ -1,0 +1,29 @@
+name: Deploy current version
+'on':
+  push:
+    branches:
+      - main
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    permissions:
+      packages: read
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Fetch latest version tarball
+        run: |
+          CURRENT_VERSION=$(head -n 1 CURRENT_VERSION)
+          LATEST_VERSION_TARBALL=$(curl -L \
+            -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" \
+            -H "Accept: application/vnd.npm.install-v1+json" \
+            https://npm.pkg.github.com/@entur/enki \
+            | jq -r ".versions.\"$CURRENT_VERSION\".dist.tarball")
+
+          echo $LATEST_VERSION_TARBALL
+
+          curl -O \
+            -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" \
+            $LATEST_VERSION_TARBALL
+
+          ls -lah
