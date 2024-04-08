@@ -12,6 +12,7 @@ jobs:
     permissions:
       packages: read
     steps:
+      - uses: actions/checkout@v4
       - run: |
           LATEST_VERSION=$(curl -L \
             -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" \
