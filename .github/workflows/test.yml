@@ -15,4 +15,5 @@ jobs:
       - run: |
           curl -L \
             -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" \
+            -H "Accept: application/vnd.npm.install-v1+json" \
             curl -L https://npm.pkg.github.com/@entur/enki
