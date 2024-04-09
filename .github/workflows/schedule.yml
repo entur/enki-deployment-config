@@ -16,7 +16,7 @@ jobs:
           git config --global user.name 'Latest version bot'
           git config --global user.email 'latest-version-bot@entur.org'
       - name: Authenticate with private NPM package
-        run: echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > ~/.npmrc
+        run: echo "//npm.pkg.github.com/:_authToken=${{ secrets.NPM_TOKEN }}" > ~/.npmrc
       - name: Check latest version
         run: |
           LATEST_VERSION=$(curl -L \
