@@ -15,12 +15,12 @@ jobs:
         run: |
           git config --global user.name 'Latest version bot'
           git config --global user.email 'latest-version-bot@entur.org'
+      - name: Authenticate with private NPM package
+        run: echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > ~/.npmrc
       - name: Check latest version
         run: |
           LATEST_VERSION=$(curl -L \
-            -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" \
-            -H "Accept: application/vnd.npm.install-v1+json" \
-            https://npm.pkg.github.com/@entur/enki \
+            npm view --json @entur/enki \
             | jq -r '.["dist-tags"].latest')
           echo $LATEST_VERSION
           CURRENT_VERSION=$(head -n 1 CURRENT_VERSION)
