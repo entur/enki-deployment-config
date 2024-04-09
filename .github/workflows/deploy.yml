@@ -19,4 +19,5 @@ jobs:
           CURRENT_VERSION=$(head -n 1 CURRENT_VERSION)
           echo $CURRENT_VERSION
           npm pack @entur/enki@$CURRENT_VERSION
-          ls -lah
+          tar -xf entur-enki-$CURRENT_VERSION.tgz
+          ls -lah package
