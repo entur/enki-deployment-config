@@ -6,7 +6,6 @@ jobs:
   test:
     runs-on: ubuntu-latest
     permissions:
-      packages: read
       contents: write
     steps:
       - name: Checkout
